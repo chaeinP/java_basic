@@ -1,17 +1,19 @@
 package prac.basic.order;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import prac.basic.annotation.MainDiscountPolicy;
 import prac.basic.discount.DiscountPolicy;
-import prac.basic.discount.FixDiscountPolicy;
-import prac.basic.discount.RateDiscountPolicy;
 import prac.basic.member.Member;
 import prac.basic.member.MemberRepository;
-import prac.basic.member.MemoryMemberRepository;
 
-public class OrderServiceImpl implements OrderService{
-    private final MemberRepository memberRepository ;
-    private final DiscountPolicy discountPolicy ;
+@Component
+public class OrderServiceImpl implements OrderService {
+    private final MemberRepository memberRepository;
+    private final DiscountPolicy discountPolicy;
 
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    @Autowired
+    public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
